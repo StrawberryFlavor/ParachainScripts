@@ -1,5 +1,4 @@
 {
-  "private_key_path": "C:/Users/windz/.ssh/id_rsa",
   "relaychain": {
     "bin": "./bin/polkadot",
     "chain": "rococo-local",
