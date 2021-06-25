@@ -1,6 +1,6 @@
 {
   "relaychain": {
-    "bin": "./bin/polkadot",
+    "bin": "/home/joey/Cli/polkadot/target/release",
     "chain": "rococo-local",
     "nodes": [
       {
@@ -37,9 +37,9 @@
   },
   "parachains": [
     {
-      "bin": "./target/release/statemint",
-      "chain": "statemint-dev",
-      "id": "1000",
+      "bin": "/home/joey/Cli/Acala/target/release/acala",
+      "chain": "karura-latest",
+      "id": "2000",
       "root": "seorgCZDzP5G3JEbsBjFdpQ4dTUgCWoPjQynyJqHCfXvZVW",
       "aura": [
         "tVwMjyfnzpLcNCDAdCwxtryp4ffaKCvXiyMqt5U4A7dk5dT",
