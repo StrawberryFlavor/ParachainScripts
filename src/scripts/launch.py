@@ -7,10 +7,6 @@ import os
 import json
 
 
-def environmental(ip_info=None):
-    print()
-
-
 def readJson():
     config_path = os.path.dirname(os.path.abspath('..')) + '/config.json'
     config = json.loads(open(config_path).read())
@@ -30,7 +26,7 @@ def writeFile(path, content):
         writer.close()
 
 
-def start(ip_info=None):
+def start():
     config = readJson()
     relayCli = config["relaychain"]['bin']
     relayChain = config["relaychain"]['chain']
@@ -39,6 +35,7 @@ def start(ip_info=None):
     shell = "{relayCli} build-spec --chain {relayChain}  --disable-default-bootnode --raw > {relayChain}.json".format(relayCli=relayCli,
                                                                                                                       relayChain=relayChain)
     print(shell)
+    command.sub_command(shell)
 
     for relayNode in relayNodes:
         relayNodeName = relayNode['name']
@@ -55,6 +52,7 @@ def start(ip_info=None):
                                                                                                                         relayNodeWsPort=relayNodeWsPort,
                                                                                                                         relayNodeFlags=relayNodeFlags)
         print(shell)
+        command.sub_command(shell)
 
     parachains = config["parachains"]
     for parachain in parachains:
@@ -66,6 +64,7 @@ def start(ip_info=None):
 
         shell = "{relayCli} build-spec --disable-default-bootnode --chain {parachainChain} > {parachainChain}.json".format(relayCli=relayCli, parachainChain=parachainChain)
         print(shell)
+        command.sub_command(shell)
 
         resp = readFile("{parachainChain}.json".format(parachainChain=parachainChain))
         resp = json.dumps(resp)
@@ -90,14 +89,16 @@ def start(ip_info=None):
         shell = "{parachainCli} export-genesis-state --parachain-id {parachainId} --chain {parachainChain} > genesis-state".format(
             parachainCli=parachainCli, parachainId=parachainId, parachainChain=parachainChain)
         print(shell)
+        command.sub_command(shell)
 
         shell = "{parachainCli} export-genesis-wasm --chain {parachainChain} > genesis-wasm".format(parachainCli=parachainCli,
                                                                                                     parachainChain=parachainChain)
         print(shell)
+        command.sub_command(shell)
 
     return
 
 
 if __name__ == '__main__':
     start()
-    print()
+
