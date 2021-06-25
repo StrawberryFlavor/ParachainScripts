@@ -1,2 +1,2 @@
 # ParachainScripts
-ParachainScripts for polkadot 
+ParachainScripts for polkadot testnet
