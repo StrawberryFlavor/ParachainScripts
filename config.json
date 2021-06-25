@@ -1,0 +1,79 @@
+{
+  "private_key_path": "C:/Users/windz/.ssh/id_rsa",
+  "relaychain": {
+    "bin": "./bin/polkadot",
+    "chain": "rococo-local",
+    "nodes": [
+      {
+        "name": "alice",
+        "wsPort": 10944,
+        "port": 10333,
+        "rpc-port": 10933,
+        "flags": [
+          "--tmp",
+          "--rpc-methods=Unsafe",
+          "--ws-external ",
+          "--rpc-external",
+          "--rpc-cors=all",
+          "--unsafe-ws-external",
+          "--unsafe-rpc-external "
+        ]
+      },
+      {
+        "name": "bob",
+        "wsPort": 20944,
+        "port": 20333,
+        "rpc-port": 20933,
+        "flags": [
+          "--tmp",
+          "--rpc-methods=Unsafe",
+          "--ws-external ",
+          "--rpc-external",
+          "--rpc-cors=all",
+          "--unsafe-ws-external",
+          "--unsafe-rpc-external "
+        ]
+      }
+    ]
+  },
+  "parachains": [
+    {
+      "bin": "./target/release/statemint",
+      "chain": "statemint-dev",
+      "id": "1000",
+      "root": "seorgCZDzP5G3JEbsBjFdpQ4dTUgCWoPjQynyJqHCfXvZVW",
+      "aura": [
+        "tVwMjyfnzpLcNCDAdCwxtryp4ffaKCvXiyMqt5U4A7dk5dT",
+        "seorgCZDzP5G3JEbsBjFdpQ4dTUgCWoPjQynyJqHCfXvZVW"
+      ],
+      "nodes": [
+        {
+          "name": "alice",
+          "wsPort": 30994,
+          "port": 30333,
+          "rpc-port": 30933,
+          "flags": [
+            "--tmp",
+            "--rpc-cors=all",
+            "-laura=debug",
+            "--",
+            "--execution=wasm"
+          ]
+        },
+        {
+          "name": "bob",
+          "wsPort": 40994,
+          "port": 40333,
+          "rpc-port": 40933,
+          "flags": [
+            "--tmp",
+            "--rpc-cors=all",
+            "-laura=debug",
+            "--",
+            "--execution=wasm"
+          ]
+        }
+      ]
+    }
+  ]
+}
