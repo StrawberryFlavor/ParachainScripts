@@ -4,7 +4,8 @@
 
 import subprocess
 import os
-from src.utils import sshoperation
+
+from ..utils import sshoperation
 
 
 def sub_command(command):

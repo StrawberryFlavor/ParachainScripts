@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 # @Time : 2021/6/25 15:02
 # @Author : Joey
-from src.utils import command
-
+import sys
 import os
 import json
+
+from ..utils import command
 
 
 def readJson():
