@@ -5,8 +5,6 @@
 import subprocess
 import os
 
-from ..utils import sshoperation
-
 
 def sub_command(command):
     print("执行命令：\n%s" % command)
@@ -31,7 +29,3 @@ def os_system(command):
     print("执行命令：\n%s" % command)
     os.system(command)
 
-
-def ssh_cmd(host, port, username):
-    ssh = sshoperation.SSHConnection(host=host, port=port, username=username)
-    return ssh
