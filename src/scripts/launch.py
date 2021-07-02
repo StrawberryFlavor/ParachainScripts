@@ -9,7 +9,7 @@ from ..utils import command
 
 
 def readJson():
-    config_path = os.path.dirname(os.path.abspath('..')) + '/config.json'
+    config_path = os.path.dirname(os.path.abspath('.')) + '/config.json'
     config = json.loads(open(config_path).read())
     return config
 
