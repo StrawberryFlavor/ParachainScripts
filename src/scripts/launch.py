@@ -28,6 +28,7 @@ def writeFile(path, content):
 
 
 def start():
+    # 中继链
     config = readJson()
     relayCli = config["relaychain"]['bin']
     relayChain = config["relaychain"]['chain']
@@ -35,26 +36,27 @@ def start():
 
     shell = "{relayCli} build-spec --chain {relayChain}  --disable-default-bootnode --raw > {relayChain}.json".format(relayCli=relayCli,
                                                                                                                       relayChain=relayChain)
-    print(shell)
+
     command.sub_command(shell)
 
-    for relayNode in relayNodes:
-        relayNodeName = relayNode['name']
-        relayNodeWsPort = relayNode['wsPort']
-        relayNodePort = relayNode['port']
+    # for relayNode in relayNodes:
+    #     relayNodeName = relayNode['name']
+    #     relayNodeWsPort = relayNode['wsPort']
+    #     relayNodePort = relayNode['port']
+    #
+    #     relayNodeFlags = ''
+    #     for flag in relayNode['flags']:
+    #         relayNodeFlags = relayNodeFlags + flag
+    #
+    #     shell = "{relayCli} --chain {relayChain} --{relayNodeName} --ws-port {relayNodeWsPort} {relayNodeFlags}".format(relayCli=relayCli,
+    #                                                                                                                     relayChain=relayChain,
+    #                                                                                                                     relayNodeName=relayNodeName,
+    #                                                                                                                     relayNodeWsPort=relayNodeWsPort,
+    #                                                                                                                     relayNodeFlags=relayNodeFlags)
+    #     print(shell)
+    #     command.sub_command(shell)
 
-        relayNodeFlags = ''
-        for flag in relayNode['flags']:
-            relayNodeFlags = relayNodeFlags + flag
-
-        shell = "{relayCli} --chain {relayChain} --{relayNodeName} --ws-port {relayNodeWsPort} {relayNodeFlags}".format(relayCli=relayCli,
-                                                                                                                        relayChain=relayChain,
-                                                                                                                        relayNodeName=relayNodeName,
-                                                                                                                        relayNodeWsPort=relayNodeWsPort,
-                                                                                                                        relayNodeFlags=relayNodeFlags)
-        print(shell)
-        command.sub_command(shell)
-
+    # 平行链
     parachains = config["parachains"]
     for parachain in parachains:
         parachainCli = parachain['bin']
@@ -63,8 +65,8 @@ def start():
         parachainRoot = parachain['root']
         parachainAura = parachain['aura']
 
-        shell = "{relayCli} build-spec --disable-default-bootnode --chain {parachainChain} > {parachainChain}.json".format(relayCli=relayCli, parachainChain=parachainChain)
-        print(shell)
+        shell = "{parachainCli} build-spec --disable-default-bootnode --chain {parachainChain} > {parachainChain}.json".format(parachainCli=parachainCli, parachainChain=parachainChain)
+
         command.sub_command(shell)
 
         resp = readFile("{parachainChain}.json".format(parachainChain=parachainChain))
@@ -89,12 +91,12 @@ def start():
 
         shell = "{parachainCli} export-genesis-state --parachain-id {parachainId} --chain {parachainChain} > genesis-state".format(
             parachainCli=parachainCli, parachainId=parachainId, parachainChain=parachainChain)
-        print(shell)
+
         command.sub_command(shell)
 
         shell = "{parachainCli} export-genesis-wasm --chain {parachainChain} > genesis-wasm".format(parachainCli=parachainCli,
                                                                                                     parachainChain=parachainChain)
-        print(shell)
+
         command.sub_command(shell)
 
     return
