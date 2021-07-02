@@ -7,7 +7,7 @@ import os
 import json
 
 
-config_path = os.path.dirname(os.path.abspath('..')) + '\\config.json'
+config_path = os.path.dirname(os.path.abspath('..')) + '/config.json'
 print(config_path)
 config = json.loads(open(config_path).read())
 
